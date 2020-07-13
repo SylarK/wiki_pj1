@@ -1,11 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, redirect
+#from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from . import util
 
-
-import random
+from random import choice
 import markdown2
 
 
@@ -27,8 +26,12 @@ def entry(request, title):
 
     })
 
-def randomic(request):
-    title = random.choice(util.list_entries())
-    return HttpResponseRedirect(reverse("entry", kwargs={"title":title}))
+def random(request):
+    return redirect(reverse("entry", kwargs={
+
+        "title":choice(util.list_entries())
+
+    }))
+
 
 
