@@ -66,6 +66,39 @@ def search(request, query):
 
             })
 
+def new(request):
+
+    #the first time, open a default page
+    if request.method == 'GET':
+        return render(request, "encyclopedia/new_page.html")
+    
+    #after, we use the data for create a new page
+    else :
+        title = request.POST['title_page']
+        cont = request.POST['text_page']
+
+        #check if the title already exists
+        
+        if(util.get_entry(title)):
+            msg = "Sorry, but a entry with the same name already exists in the database. Search the entry or change the title."
+
+            return render(request, "encyclopedia/error.html", {
+
+                "msg":msg
+
+            })
+        else:
+            util.save_entry(title, cont)
+            
+            return redirect(reverse("entry", kwargs={
+
+                "title":title
+
+            }))
+
+        
+
+
         
 
 
