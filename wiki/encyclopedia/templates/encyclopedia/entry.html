@@ -1,5 +1,16 @@
 {% extends "encyclopedia/layout.html" %}
 
+{% block title %}
+
+    {% if content != "" %}
+        {{ title }}
+    {% else %}
+        Error
+    {% endif %}
+
+{% endblock %}
+
+
 {%block body%}
     
     {% if content != "" %}
@@ -7,7 +18,7 @@
         
     {% else %}
         <h1>Error</h1>
-        <p id="content_error">Sorry, but the entry it doesn't exist or isn't available at the moment. Please, contact support.</p>
+        <p id="content_error">Sorry, but the page was not found. Please, contact support.</p>
     {% endif %}
 
 {% endblock %}

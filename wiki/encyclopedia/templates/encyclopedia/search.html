@@ -1,0 +1,26 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia Search
+{% endblock %}
+
+{% block body %}
+    <h1>Search result</h1>
+
+    {% if check %}
+
+        <ul>
+            {% for entry in controlList %}
+                <li><a href="wiki/{{entry}}">{{ entry }}</a></li>
+            {% endfor %}
+        </ul>
+
+    {% else %}
+
+        <h3>Not found</h3>
+        <p>Sorry, we don't find any word that seems with this chars </p>
+        
+        
+    {% endif %}
+
+{% endblock %}
