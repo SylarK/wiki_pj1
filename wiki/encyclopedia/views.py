@@ -7,7 +7,6 @@ from . import util
 
 from random import choice
 import markdown2
-import os
 
 #
 
