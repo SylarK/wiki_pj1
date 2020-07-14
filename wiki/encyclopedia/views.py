@@ -7,6 +7,7 @@ from . import util
 
 from random import choice
 import markdown2
+import os
 
 #
 
@@ -96,6 +97,26 @@ def new(request):
 
             }))
 
+def edit(request, query):
+
+    if request.method=="GET":
+        content = util.get_entry(query)
+        return render(request, "encyclopedia/edit.html", {
+
+                "title":query,
+                "text":content
+
+            })
+    else:
+        title = request.POST['title_page']
+        content = request.POST['text_page']
+        util.save_entry(title, content)
+        return redirect(reverse("entry", kwargs={
+
+                "title":title
+
+            }))
+        
         
 
 
