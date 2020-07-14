@@ -18,17 +18,24 @@ def index(request):
     })
 
 def entry(request, title):
-    #check if is not empty
-    if util.get_entry(title):
+    
+    if title in util.list_entries():
         cont = markdown2.markdown(util.get_entry(title))
+       
+        return render(request, "encyclopedia/entry.html", {
+
+            'content':cont,
+            'title':title
+        })
+
+        
     else:
-        cont = ""
-    return render(request, "encyclopedia/entry.html", {
+        return render(request, "encyclopedia/error.html", {
 
-        'content':cont,
-        'title':title
+            "msg": "The page was not found. Check if you write correctly and try again."
 
-    })
+        })
+    
 
 def random(request):
     return redirect(reverse("entry", kwargs={
@@ -53,18 +60,26 @@ def search(request, query):
         else:
             controlList = []
             check = False
+            
+
             for item in list_names:
                 #check if the char of value is in list
                 if value.lower() in item.lower():
                     controlList.append(item)
                     check = True
-            
-            return render(request, "encyclopedia/search.html", {
+                    
+            if(check):          
+                return render(request, "encyclopedia/search.html", {
 
-                "controlList":controlList,
-                "check":check
+                    "controlList":controlList,
+                    
+                })
+            else: 
+                return render(request, "encyclopedia/error.html", {
 
-            })
+                    "msg": "The page was not found. We don't find any word that seems with this chars"
+
+                })
 
 def new(request):
 

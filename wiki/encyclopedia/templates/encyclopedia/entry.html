@@ -13,14 +13,9 @@
 
 {%block body%}
     
-    {% if content != "" %}
+        
         {{ content | safe}}
         <a class="btn btn-dark" href="{% url 'edit' title %}">Edit Page</a>
-
-    {% else %}
-        <h1>Empty</h1>
-        <p id="content_error">Sorry, but the page is empty.</p> 
-            <p>Can you help us and write what you now about it (press <a href="{% url 'edit' title %}">Edit Page<a>).</p>
-    {% endif %}
+    
 
 {% endblock %}

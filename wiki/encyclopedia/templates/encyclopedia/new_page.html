@@ -11,8 +11,8 @@
     <form action="" method="post">
         
         {% csrf_token %}
-        <input type="text" name="title_page" id="title_page">
-        <textarea name="text_page" id="text_page"></textarea>
+        <input type="text" name="title_page" id="title_page" required placeholder="Title">
+        <textarea name="text_page" id="text_page" required></textarea>
         <br>
         <input type="submit" class="btn btn-dark" id="btn_save" value="Save">
 
